@@ -5,8 +5,8 @@ Class Contact extends AbstractModel
 	protected $_table = "contacts";
 	protected $_pk	  = "id";
 	private $dbHost = "localhost";
-	private $dbUser = "slicery";
-	private $dbPass = "justinm1";
+	private $dbUser = "testUser";
+	private $dbPass = "testPass";
 	private $dbDatabase = "customerparadigm";
 	
 	public function connect()
@@ -17,7 +17,7 @@ Class Contact extends AbstractModel
 	public function GetAll()
 	{
 		$connDB = $this->connect();
-		$strSQL = "SELECT * FROM contacts ORDER BY id";
+		$strSQL = "SELECT * FROM ".$this->_table." ORDER BY ".$this->_pk;
 		$result = $connDB->query($strSQL);
 
 		/*Check the Number of Rows*/
