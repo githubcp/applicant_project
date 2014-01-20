@@ -6,6 +6,7 @@
 				window.location = "/"
 			}
 		</script>
+    	<link rel="stylesheet" href="master.css" type="text/css">
     </head>
     <body>
 <?php
@@ -43,10 +44,11 @@
 
 ?>
 		<form name="contactInput" action="create.php" method="post">
-        	<div>
+        	<div class="ContactTitle">Contacts</div>
+            <div class="ContactBody">
             	<input type="hidden" name="CreatePosted" value="yes" />
-            	Name: <input type="text" value="" name="ContactName" /><br />
-                Email: <input type="text" value="" name="ContactEmail" /><br />
+            	<div class="label">Name: </div><div class="InputValue"><input type="text" value="" name="ContactName" /></div><br />
+                <div class="label">Email: </div><div class="InputValue"><input type="text" value="" name="ContactEmail" /></div><br />
                 <input type="Submit" value="Submit" name="Submit" />
                 <input type="button" value="Home" name="Home" onClick="GoHome()" />
             </div>

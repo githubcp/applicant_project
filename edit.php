@@ -6,6 +6,7 @@
 				window.location = "/"
 			}
 		</script>
+    	<link rel="stylesheet" href="master.css" type="text/css">
     </head>
     <body>
 <?php
@@ -60,11 +61,12 @@
 	}
 
 	echo "<form name='contactInput' action='edit.php?id=".$_GET['id']."' method='post'>";
-	echo "<div>";
+	echo "<div class='ContactTitle'>Contacts</div>";
+	echo "<div class='ContactBody'>";
 	echo "<input type='hidden' name='EditPosted' value='yes' />";
-	echo "ID: <input type='text' value='".$contact->getData('id')."' name='ContactID' disabled='true' /><br />";
-	echo "Name: <input type='text' value='".$contact->getData('name')."' name='ContactName' /><br />";
-	echo "Email: <input type='text' value='".$contact->getData('email')."' name='ContactEmail' /><br />";
+	echo "<div class='label'>ID: </div><div class='InputValue'><input type='text' value='".$contact->getData('id')."' name='ContactID' disabled='true' /></div><br />";
+	echo "<div class='label'>Name: </div><div class='InputValue'><input type='text' value='".$contact->getData('name')."' name='ContactName' /></div><br />";
+	echo "<div class='label'>Email: </div><div class='InputValue'><input type='text' value='".$contact->getData('email')."' name='ContactEmail' /></div><br />";
 	echo "<input type='Submit' value='Submit' name='Submit' />";
 	echo "<input type='button' value='Home' name='Home' onClick='GoHome()' />";
 	echo "</div>";
