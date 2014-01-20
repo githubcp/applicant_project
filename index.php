@@ -1,3 +1,8 @@
+<html>
+	<head>
+    </head>
+    <body>
+
 <?PHP
 require_once("AbstractModel.php");
 require_once("Contact.php");
@@ -5,41 +10,30 @@ ini_set("display_errors", true);
 
 $contact = new Contact();
 
-$contact->load(1);
-print_r($contact->getData()); 
-// Should print:
-// id => 1,
-// name => John Doe
-// email => john@doe.com
-echo '<br/><br/>';
-echo $contact->getData('name');
-//Should print:
-// John Doe
+$records = $contact->GetAll();
 
-$contact->setData('name', 'John Walker')->save(); //Should run an UPDATE query
-echo '<br/><br/>';
-print_r($contact->load(1)->getData());
-//Should print
-// id => 1,
-// name => John Walker
-// email => john@doe.com
+$ColCount = count($records);
+$RowCount = (count($records,1)/count($records,0))-1;
 
-$contact->setData(array(
-"id" => 1,
-"name" => "John Doe the 2nd",
-"email" => "john@doe2.com"
-))->save();
-echo '<br/><br/>';
-print_r($contact->load(1)->getData());
-//Should print
-// id => 1,
-// name => John Doe the 2nd
-// email => john@doe2.com
+echo "<table border=1>";
+echo "<tr><td colspan=4>Contacts</td></tr>";
+echo "<tr><td colspan=4><a href=create.php>New Contact</a></td></tr>";
+echo "<tr><td>ID</td><td>Name</td><td colspan=2>Email</td></tr>";
 
-print "<table width='400' border='0' align='center' cellpadding='3' cellspacing='1'>";
-print "<tr>";
-print "<td><strong>Contact Form </strong></td>";
-print "</tr>";
-print "</table>";
+for ($RowNum = 0; $RowNum < $RowCount; $RowNum++)
+{
+	echo "<tr>";
+	echo "<td>".$records['id'][$RowNum]."</td>";
+	echo "<td>".$records['name'][$RowNum]."</td>";
+	echo "<td>".$records['email'][$RowNum]."</td>";
+	echo "<td><a href=view.php?id=".$records['id'][$RowNum].">view</a> | ";
+	echo "<a href=edit.php?id=".$records['id'][$RowNum].">edit</a> | ";
+	echo "<a href=delete.php?id=".$records['id'][$RowNum].">delete</a></td>";
+	echo "</tr>";
+	
+}
 
 ?>
+
+    </body>
+</html>
