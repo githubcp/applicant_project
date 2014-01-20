@@ -5,8 +5,8 @@ Class Contact extends AbstractModel
 	protected $_table = "contacts";
 	protected $_pk	  = "id";
 	private $dbHost = "localhost";
-	private $dbUser = "slicery";
-	private $dbPass = "justinm1";
+	private $dbUser = "testUser";
+	private $dbPass = "testPass";
 	private $dbDatabase = "customerparadigm";
 	
 	public function connect()
