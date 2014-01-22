@@ -1,0 +1,67 @@
+<?php
+require_once("./AbstractModel.php");
+Class Contact extends AbstractModel
+{
+        protected $_table = "contacts";
+        protected $_pk         = "id";
+}
+?>
+
+<?php
+class AbstractModel
+{
+	$TableName = contacts
+	
+public function save()
+	{
+	$con = mysqli_connect("localhost","my_user","my_password","my_db");
+	
+	mysqli_query($con,"INSERT INTO TableName (id, name, email)
+	VALUES (3, 'Gilbert Barber', 'gilbTheparrot@gmail.com')"); 
+//	mysqli_query($con,"INSERT INTO TableName (name, email)
+//	VALUES ('Gilbert Barber', 'gilbTheparrot@gmail.com')"); 
+
+	mysqli_close($con);
+	}
+public function load($id)
+	{
+	
+	}
+
+public function getData($key=false)
+	{
+	$con = mysqli_connect("localhost","my_user","my_password","my_db");
+
+	$result1 = mysqli_query($con,"SELECT * FROM TableName WHERE ID = 1");
+
+	while($row = mysqli_fetch_array($result1))
+	{
+	print $row['Name'] ;
+	}
+
+	$result2 = mysqli_query($con,"SELECT * FROM TableName WHERE ID >= 1");
+	while($row = mysqli_fetch_array($result2))
+	{
+	print $row['Name'] . " " . $row['LastName'] ;
+	}
+
+	mysqli_close($con);
+	}
+public function setData($arr, $value=false)
+	{
+	
+	}
+public function delete($id)
+	{
+	$con = mysqli_connect("localhost","my_user","my_password","my_db");
+	
+//	mysqli_query($con,"DELETE FROM TableName WHERE Name='Gilbert Barber'");
+	mysqli_query($con,"DELETE FROM TableName WHERE id=3");
+
+	mysqli_close($con);
+	}
+}
+
+$AbstractModel = new AbstractModel;
+//$AbstractModel->do_AbstractModel();
+?>
