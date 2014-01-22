@@ -1,79 +1,41 @@
-<html>
-	<head>
-    	<link rel="stylesheet" href="master.css" type="text/css">
-    </head>
-    <body>
-	
-	<?PHP
-		require_once("AbstractModel.php");
-		require_once("Contact.php");
-		ini_set("display_errors", true);
-		
-		function GetArrayKeys(array $array)
-		{
-			$keys = array();
-			
-			foreach($array as $key => $value)
-			{
-				$keys[] = $key;
-			}
-			return $keys;
-		}
-		
-		$contact = new Contact();
-		
-		$records = $contact->GetAll();
-		
-		$ColCount = count($records);
-		$ColSpan = $ColCount + 1;
-		$RowCount = (count($records,1)/count($records,0))-1;
-		$ColumnNames = GetArrayKeys($records);
-		
-		echo "<table class='MasterTable' cellspacing=0>";
-		echo "<tr class='ContactTitle'><td colspan=".$ColSpan.">Contacts</td></tr>";
-		echo "<tr><td class='ContactNew' colspan=".$ColSpan."><a href=create.php>New Contact</a></td></tr>";
-		//echo "<tr><td>ID</td><td>Name</td><td colspan=2>Email</td></tr>";
-		echo "<tr>";
-		for ($ColNum = 0; $ColNum < $ColCount; $ColNum++)
-		{
-			if ($ColNum == 0)
-			{
-				$AddAttributes = "class='ContactHeaderLeft'";
-			}
-			elseif ($ColNum == $ColCount-1)
-			{
-				$AddAttributes = "class='ContactHeaderRight' colspan=2";
-			}
-			else
-			{
-				$AddAttributes = "class='ContactHeader'";
-			}
-			echo "<td ".$AddAttributes.">".$ColumnNames[$ColNum]."</td>";
-		}
-		echo "<td class>&nbsp;</td></tr>";
-		
-		for ($RowNum = 0; $RowNum < $RowCount; $RowNum++)
-		{
-			echo "<tr>";
-			for ($ColNum = 0; $ColNum < $ColCount; $ColNum++)
-			{
-				if ($ColNum == 0)
-				{
-					$AddAttributes = "class='ContactCellLeft'";
-				}
-				else
-				{
-					$AddAttributes = "class='ContactCell'";
-				}
-				echo "<td ".$AddAttributes.">".$records[$ColumnNames[$ColNum]][$RowNum]."</td>";
-			}
-			echo "<td class='ContactCellRight'><a href=view.php?id=".$records['id'][$RowNum].">view</a> | ";
-			echo "<a href=edit.php?id=".$records['id'][$RowNum].">edit</a> | ";
-			echo "<a href=delete.php?id=".$records['id'][$RowNum].">delete</a></td>";
-			echo "</tr>";
-			
-		}	
-	?>
+<?php
+/**
+ * Requests collector.
+ *
+ *  This file collects requests if:
+ *	- no mod_rewrite is available or .htaccess files are not supported
+ *  - requires App.baseUrl to be uncommented in app/Config/core.php
+ *	- app/webroot is not set as a document root.
+ *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
+ * @since         CakePHP(tm) v 0.2.9
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
 
-    </body>
-</html>
+/**
+ *  Get CakePHP's root directory
+ */
+define('APP_DIR', 'app');
+define('DS', DIRECTORY_SEPARATOR);
+define('ROOT', dirname(__FILE__));
+define('WEBROOT_DIR', 'webroot');
+define('WWW_ROOT', ROOT . DS . APP_DIR . DS . WEBROOT_DIR . DS);
+
+/**
+ * This only needs to be changed if the "cake" directory is located
+ * outside of the distributed structure.
+ * Full path to the directory containing "cake". Do not add trailing directory separator
+ */
+if (!defined('CAKE_CORE_INCLUDE_PATH')) {
+	define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'lib');
+}
+
+require APP_DIR . DS . WEBROOT_DIR . DS . 'index.php';
