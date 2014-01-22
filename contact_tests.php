@@ -51,3 +51,4 @@ print_r($newContact->getData());
 // email => gilbTheparrot@gmail.com
 
 $newContact->delete(); //Should delete him Gilbert Barber from the database
+?>
